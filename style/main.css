@@ -182,7 +182,7 @@ hr { border: none; border-bottom: 1px solid #d8d4d0; margin-top: 20px; margin-bo
   .tile .tile-inner { font-size: 35px; }
   .game-message p { font-size: 30px !important; height: 30px !important; line-height: 30px !important; margin-top: 90px !important; }
   .game-message .lower { margin-top: 30px !important; } }
-#prom p { margin-top: 20px; display: none; }
+#prom p { margin-top: 20px !important; display: none; }
 #prom p:first-child { margin-top: 50px; }
 #prom #prom2 { display: block; }
 #prom #prom2 span { opacity: 0; }
