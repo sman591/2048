@@ -1,0 +1,16 @@
+#prom {
+  p {
+    margin-top: 20px;
+    display: none;
+    &:first-child {
+      margin-top: 50px;
+    }
+  }
+
+  #prom2 {
+    display: block;
+    span {
+      opacity: 0;
+    }
+  }
+}
