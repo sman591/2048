@@ -25,7 +25,9 @@ HTMLActuator.prototype.actuate = function (grid, metadata) {
     self.updateBestScore(metadata.bestScore);
 
     if (metadata.terminated) {
-      if (metadata.over) {
+      if (metadata.wonprom) {
+        self.messageProm(); // Ask prom
+      } else if (metadata.over) {
         self.message(false); // You lose
       } else if (metadata.won) {
         self.message(true); // You win!
@@ -130,6 +132,36 @@ HTMLActuator.prototype.message = function (won) {
 
   this.messageContainer.classList.add(type);
   this.messageContainer.getElementsByTagName("p")[0].textContent = message;
+};
+
+HTMLActuator.prototype.messageProm = function () {
+  var type    = "game-won";
+  var message = "";
+
+  this.messageContainer.classList.add(type);
+  this.messageContainer.removeChild(this.messageContainer.getElementsByTagName("p")[0]);
+  this.messageContainer.getElementsByTagName("div")[0].style.display = 'none';
+
+  var messageContainer = $(this.messageContainer);
+  messageContainer.prepend('<div id="prom"></div>');
+  var promContainer = messageContainer.find('#prom');
+  promContainer.append('<p id="prom1">Mina,</p><p id="prom2"><span>Will</span> <span>you</span> <span>go</span> <span>to</span></p><p id="prom3">PROM</p><p id="prom4">with me?</p>');
+
+  $('#prom1').delay(2500).fadeIn(800, function() {
+    $('#prom2').children('span').each(function(i,j) {
+      $(this).delay(300 + 250*i).animate({
+        opacity: 1
+      }, 600, function() {
+        if (i+1 == $('#prom2').children('span').size()) {
+          $('#prom3').fadeIn(500, function () {
+            $('#prom4').delay(200).fadeIn(500, function () {
+              messageContainer.find('.lower').delay(10000).fadeIn(1000);
+            })
+          });
+        }
+      });
+    });
+  });
 };
 
 HTMLActuator.prototype.clearMessage = function () {
